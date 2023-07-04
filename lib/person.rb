@@ -37,8 +37,8 @@ class Person
         self.happiness +=3
        if  friend.class == Person 
          friend.happiness +=3 
+         "Hi #{friend.name}! It's #{self.name}. How are you?"
        end
-        "Hi #{friend.name}! It's #{self.name}. How are you?"
     end
     def start_conversation(friend, topic)
         case topic

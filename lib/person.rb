@@ -35,10 +35,21 @@ class Person
     end
     def call_friend (friend)
         self.happiness +=3
-       if  friend.class == Person 
-         friend.happiness +=3 
-         "Hi #{friend.name}! It's #{self.name}. How are you?"
-       end
+       if  friend.is_a?(Person) 
+           friend.happiness +=3 
+           "Hi #{friend.name}! It's #{self.name}. How are you?"
+       #rescue the application from the error
+       else
+         raise FriendError
+        end
+        rescue FriendError => error
+         puts error.message
+        end
+    #add custom error when the friend is not an instance of the Person class
+    class FriendError < StandardError
+        def message
+            "you must give the call_friend method an argument of an instance of the person class!"
+          end
     end
     def start_conversation(friend, topic)
         case topic
@@ -59,5 +70,6 @@ end
 donvine = Person.new("donvine")
 puts donvine.name
 mary = Person.new("mary")
-
-binding.pry
+donvine.call_friend("john")
+puts mary.name
+# binding.pry
